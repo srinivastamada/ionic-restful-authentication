@@ -1,0 +1,12 @@
+<ion-header>
+  <ion-navbar>
+    <img ion-right src="assets/imgs/bananalogo.png" class="navbarLogo" />
+    <ion-title>Home</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <h2>Welcome to {{userDetails.name}}</h2>
+  <h3>{{userDetails.email}}</h3>
+  <button ion-button color="primary" (click)="logout()">Logout</button>
+</ion-content>
