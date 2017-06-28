@@ -1,0 +1,10 @@
+import { BuildContext } from './util/interfaces';
+import { getNgModules, GeneratorOption, GeneratorRequest } from './generators/util';
+export { getNgModules, GeneratorOption, GeneratorRequest };
+export declare function processPageRequest(context: BuildContext, name: string): Promise<string[]>;
+export declare function processPipeRequest(context: BuildContext, name: string, ngModulePath: string): Promise<string[]>;
+export declare function processDirectiveRequest(context: BuildContext, name: string, ngModulePath: string): Promise<string[]>;
+export declare function processComponentRequest(context: BuildContext, name: string, ngModulePath: string): Promise<string[]>;
+export declare function processProviderRequest(context: BuildContext, name: string, ngModulePath: string): Promise<string[]>;
+export declare function processTabsRequest(context: BuildContext, name: string, tabs: string[]): Promise<void>;
+export declare function listOptions(): GeneratorOption[];

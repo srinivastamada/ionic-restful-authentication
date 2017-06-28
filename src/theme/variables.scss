@@ -1,20 +1,13 @@
 // Ionic Variables and Theming. For more info, please see:
 // http://ionicframework.com/docs/v2/theming/
 $font-path: "../assets/fonts";
-
 @import "ionic.globals";
-
-
 // Shared Variables
 // --------------------------------------------------
 // To customize the look and feel of this app, you can override
 // the Sass variables found in Ionic's source scss files.
 // To view all the possible Ionic variables, see:
 // http://ionicframework.com/docs/v2/theming/overriding-ionic-variables/
-
-
-
-
 // Named Color Variables
 // --------------------------------------------------
 // Named colors makes it easy to reuse colors on various components.
@@ -22,60 +15,84 @@ $font-path: "../assets/fonts";
 // to match your app's branding. Ionic uses a Sass map of
 // colors so you can add, rename and remove colors as needed.
 // The "primary" color is the only required color in the map.
-
-$colors: (
-  primary:    #2A2C43,
-  secondary:  #677077,
-  lightprimary:     #B5B5B7,
-  light:      #f4f4f4,
-  dark:       #222,
-  energy:      #f2b632
-);
-
+$colors: ( primary : #2A2C43, secondary : #677077, lightprimary : #B5B5B7, light : #f4f4f4, dark : #222, energy : #f2b632);
 $toolbar-background: color($colors, primary);
-
-
 // App iOS Variables
 // --------------------------------------------------
 // iOS only Sass variables can go here
-
-
-
-
 // App Material Design Variables
 // --------------------------------------------------
 // Material Design only Sass variables can go here
-
-
-
-
 // App Windows Variables
 // --------------------------------------------------
 // Windows only Sass variables can go here
-
-
-
-
 // App Theme
 // --------------------------------------------------
 // Ionic apps can have different themes applied, which can
 // then be future customized. This import comes last
 // so that the above variables are used and Ionic's
 // default are overridden.
-
 @import "ionic.theme.default";
-
-
 // Ionicons
 // --------------------------------------------------
 // The premium icon font for Ionic. For more info, please see:
 // http://ionicframework.com/docs/v2/ionicons/
-
 @import "ionic.ionicons";
-
-
 // Fonts
 // --------------------------------------------------
+//@import "roboto";
+//@import "noto-sans";
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../assets/fonts/opensans/400/opensans-regular-webfont.ttf');
+}
 
-@import "roboto";
-@import "noto-sans";
+@font-face {
+  font-family: 'Open Sans';
+  font-style: semi-bold;
+  font-weight: 600;
+  src: url('../assets/fonts/opensans/600/opensans-semibold-webfont.ttf');
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: bold;
+  font-weight: 700;
+  src: url('../assets/fonts/opensans/700/opensans-bold-webfont.ttf');
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: extra-bold;
+  font-weight: 900;
+  src: url('../assets/fonts/opensans/900/opensans-extrabold-webfont.ttf');
+}
+
+$font-family-base: "Open Sans";
+body {
+  font-family: "Open Sans" !important;
+  font-weight: 400 !important;
+}
+
+h1,
+h2,
+button,
+p {
+  font-family: "Open Sans" !important;
+}
+
+@import "../assets/scss/font-awesome/font-awesome";
+
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('../assets/fonts/font-awesome/fontawesome-webfont.eot');
+  src: url('../assets/fonts/font-awesome/fontawesome-webfont.eot') format('embedded-opentype'),
+  url('../assets/fonts/font-awesome/fontawesome-webfont.woff2') format('woff2'),
+  url('../assets/fonts/font-awesome/fontawesome-webfont.woff}') format('woff'),
+  url('../assets/fonts/font-awesome/fontawesome-webfont.ttf') format('truetype'),
+  url('../assets/fonts/font-awesome/fontawesome-webfont.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}

@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.CLASSNAME_VARIABLE = '$CLASSNAME';
+exports.TAB_CONTENT_VARIABLE = '$TAB_CONTENT';
+exports.TAB_VARIABLES_VARIABLE = '$TAB_VARIABLES';
+exports.FILENAME_VARIABLE = '$FILENAME';
+exports.SUPPLIEDNAME_VARIABLE = '$SUPPLIEDNAME';
+exports.KNOWN_FILE_EXTENSION = '.tmpl';
+exports.SPEC_FILE_EXTENSION = 'spec.ts';
+exports.NG_MODULE_FILE_EXTENSION = 'module.ts';
