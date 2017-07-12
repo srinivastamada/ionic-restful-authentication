@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController} from 'ionic-angular';
+import {IonicPage, NavController, ToastController} from 'ionic-angular';
 import {AuthService} from "../../providers/auth-service";
 
 import {TabsPage} from '../tabs/tabs';
@@ -16,7 +16,7 @@ import {Login} from "../login/login";
 export class Signup {
   resposeData : any;
   userData = {"username":"", "password":"","email":"","name":""};
-  constructor(public navCtrl : NavController, public authService : AuthService) {}
+  constructor(public navCtrl : NavController, public authService : AuthService, private toastCtrl:ToastController) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad Signup');
@@ -28,14 +28,19 @@ export class Signup {
     this.authService.postData(this.userData, "signup").then((result) =>{
     this.resposeData = result;
     console.log(this.resposeData);
+     if(this.resposeData.userData){
     localStorage.setItem('userData', JSON.stringify(this.resposeData) )
     this.navCtrl.push(TabsPage);
+     }
+     else{
+       this.presentToast("Give valid information.");
+     }
     }, (err) => {
       //Connection failed message
     });
   }
   else {
-    console.log("Give valid information.");
+   this.presentToast("Give valid information.");
   }
   
   }
@@ -44,6 +49,14 @@ export class Signup {
     this
       .navCtrl
       .push(Login);
+  }
+
+   presentToast(msg) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 2000
+    });
+    toast.present();
   }
 
 }
