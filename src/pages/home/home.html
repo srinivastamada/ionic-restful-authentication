@@ -9,5 +9,14 @@
   <h2>Welcome to {{userDetails.name}}</h2>
   <h3><i class="fa fa-heart-o" aria-hidden="true"></i> <i class="fa fa-microchip blue" aria-hidden="true"></i></h3>
   <h3>{{userDetails.email}}</h3>
+
+  <ion-card *ngFor="let item of dataSet">
+    <ion-card-content>
+    
+     <p [innerHTML]="item.feed | linky"></p>
+     <span>{{this.converTime(item.created) | amTimeAgo}}</span>
+    </ion-card-content>
+  </ion-card>
+
   <button ion-button color="primary" (click)="logout()">Logout</button>
 </ion-content>

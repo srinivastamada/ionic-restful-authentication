@@ -23,7 +23,8 @@ export class Signup {
   }
 
   signup() {
-    //Api connections
+    if(this.userData.username && this.userData.password && this.userData.email && this.userData.name){
+      //Api connections
     this.authService.postData(this.userData, "signup").then((result) =>{
     this.resposeData = result;
     console.log(this.resposeData);
@@ -32,6 +33,11 @@ export class Signup {
     }, (err) => {
       //Connection failed message
     });
+  }
+  else {
+    console.log("Give valid information.");
+  }
+  
   }
 
   login() {

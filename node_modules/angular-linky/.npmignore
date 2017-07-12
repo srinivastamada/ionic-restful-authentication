@@ -1,0 +1,14 @@
+/node_modules/
+/typings/
+/compiled/
+
+*.ts
+!*.d.ts
+*.spec.ts
+*.spec.d.ts
+*.spec.js
+*.spec.js.map
+
+.travis.yml
+.karma.conf.js
+tsconfig.json
