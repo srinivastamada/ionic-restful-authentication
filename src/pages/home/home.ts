@@ -47,15 +47,13 @@ export class HomePage {
 
   backToWelcome(){
    const root = this.app.getRootNav();
-    root.popToRoot();
+   root.popToRoot();
   }
 
   logout(){
     //Api Token Logout 
-    
     localStorage.clear();
      setTimeout(()=> this.backToWelcome(), 1000);
-    
   }
 
 }
