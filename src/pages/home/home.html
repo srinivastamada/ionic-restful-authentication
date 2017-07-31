@@ -1,6 +1,9 @@
 <ion-header>
   <ion-navbar>
-    <img ion-right src="assets/imgs/bananalogo.png" class="navbarLogo" />
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <img ion-left src="assets/imgs/bananalogo.png" class="navbarLogo" />
     <ion-title>Home</ion-title>
   </ion-navbar>
 </ion-header>
@@ -17,5 +20,5 @@
     </ion-card-content>
   </ion-card>
 
-  <button ion-button color="primary" (click)="logout()">Logout</button>
+  <!--<button ion-button color="primary" (click)="logout()">Logout</button>-->
 </ion-content>

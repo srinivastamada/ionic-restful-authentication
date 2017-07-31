@@ -1,1 +1,27 @@
-<ion-nav [root]="rootPage"></ion-nav>
+
+
+<ion-split-pane [when]="splitPane.getSplitPane()">
+
+  <!--  our side menu  -->
+  <ion-menu [content]="content">
+ <ion-header>
+    <ion-toolbar>
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+    <ion-content>
+    <!--<ion-list>
+      <h2>Welcome to {{userDetails.name}}</h2>
+    </ion-list>-->
+    <ion-list>
+      <button ion-button color="primary" (click)="logout()">Logout</button>
+    </ion-list>
+  </ion-content>
+
+
+  </ion-menu>
+
+  <!-- the main content -->
+  <ion-nav [root]="rootPage" main #content></ion-nav>
+</ion-split-pane>
