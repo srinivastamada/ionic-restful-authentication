@@ -10,8 +10,18 @@
 
 <ion-content padding>
   <h2>Welcome to {{userDetails.name}}</h2>
-  <h3><i class="fa fa-heart-o" aria-hidden="true"></i></h3>
-  <h3>{{userDetails.email}}</h3>
+ 
+
+  <ion-item id="feedUpdate">
+    <ion-row>
+  <textarea [(ngModel)]="userPostData.feed"></textarea>
+    </ion-row>
+    <ion-row>
+  <span item-right>
+  <button ion-button color="energy" (click)="feedUpdate()" >Update</button>
+  </span>
+  </ion-row>
+  </ion-item>
 
   <ion-card *ngFor="let item of dataSet">
     <ion-card-content>
