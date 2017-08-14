@@ -3,7 +3,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <img ion-left src="assets/imgs/bananalogo.png" class="navbarLogo" />
+    <img ion-right src="assets/imgs/bananalogo.png" class="navbarLogo" />
     <ion-title>Home</ion-title>
   </ion-navbar>
 </ion-header>
@@ -14,6 +14,8 @@
 
   <ion-item id="feedUpdate">
     <ion-row>
+
+       
   <textarea [(ngModel)]="userPostData.feed"></textarea>
     </ion-row>
     <ion-row>
@@ -23,12 +25,29 @@
   </ion-row>
   </ion-item>
 
-  <ion-card *ngFor="let item of dataSet">
+  <ion-card *ngFor="let item of dataSet; let msgIndex = index">
+    <ion-item>
+      <ion-icon name="trash" item-right (click)="feedDelete(item.feed_id, msgIndex)"></ion-icon>
     <ion-card-content>
+       
      <p [innerHTML]="item.feed | linky"></p>
+
      <span>{{ converTime(item.created) | amTimeAgo}}</span>
     </ion-card-content>
+    </ion-item>
   </ion-card>
+
+  <ion-card *ngIf="dataSet?.length === 0">
+      <ion-item>
+        
+      <ion-card-content>
+         
+       <p >No user updates</p>
+  
+    
+      </ion-card-content>
+      </ion-item>
+    </ion-card>
 
   <!--<button ion-button color="primary" (click)="logout()">Logout</button>-->
 </ion-content>

@@ -2,6 +2,7 @@
 import {Component} from '@angular/core';
 import {NavController, App} from 'ionic-angular';
 import {AuthService} from "../../providers/auth-service";
+import {Common} from "../../providers/common";
 
 @Component({selector: 'page-home', templateUrl: 'home.html'})
 export class HomePage {
@@ -11,10 +12,11 @@ export class HomePage {
   userPostData = {
     "user_id": "",
     "token": "",
-    "feed":""
+    "feed":"",
+    "feed_id":""
   };
 
-  constructor(public navCtrl : NavController, public app : App, public authService : AuthService) {
+  constructor(public navCtrl : NavController, public app : App, public common:Common, public authService : AuthService) {
     const data = JSON.parse(localStorage.getItem('userData'));
     this.userDetails = data.userData;
     this.userPostData.user_id = this.userDetails.user_id;
@@ -25,6 +27,7 @@ export class HomePage {
   }
 
   getFeed() {
+    this.common.presentLoading();
     this
       .authService
       .postData(this.userPostData, "feed")
@@ -33,6 +36,7 @@ export class HomePage {
         if (this.resposeData.feedData) {
           this.dataSet = this.resposeData.feedData;
           console.log(this.dataSet);
+          this.common.closeLoading();
         } else {
           console.log("No access");
         }
@@ -44,7 +48,7 @@ export class HomePage {
 
   feedUpdate() {
     if(this.userPostData.feed){
-   
+    this.common.presentLoading();
     this
       .authService
       .postData(this.userPostData, "feedUpdate")
@@ -53,6 +57,7 @@ export class HomePage {
         if (this.resposeData.feedData) {
           this.dataSet.unshift(this.resposeData.feedData);
           this.userPostData.feed ="";
+          this.common.closeLoading();
         } else {
           console.log("No access");
         }
@@ -62,6 +67,29 @@ export class HomePage {
       });
     }
     
+  }
+
+  feedDelete(feed_id, msgIndex){
+    this.userPostData.feed_id = feed_id;
+
+    if(feed_id){
+      this.common.presentLoading();
+       this
+         .authService
+         .postData(this.userPostData, "feedDelete")
+         .then((result) => {
+           this.resposeData = result;
+           if (this.resposeData.success) {
+             this.dataSet.splice(msgIndex, 1);
+             this.common.closeLoading();
+           } else {
+             console.log("No access");
+           }
+   
+         }, (err) => {
+           //Connection failed message
+         });
+       }
   }
 
   converTime(time) {
