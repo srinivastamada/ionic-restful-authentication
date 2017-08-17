@@ -3,21 +3,29 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <img ion-left src="assets/imgs/bananalogo.png" class="navbarLogo" />
+    <img ion-right src="assets/imgs/bananalogo.png" class="navbarLogo" />
     <ion-title>Home</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
   <h2>Welcome to {{userDetails.name}}</h2>
-  <h3><i class="fa fa-heart-o" aria-hidden="true"></i></h3>
-  <h3>{{userDetails.email}}</h3>
+ <ion-item id="udpateBox">
+<textarea [(ngModel)]="userPostData.feed"></textarea>
+<ion-row>
+<button ion-button color="energy" (click)="feedUpdate()">Update</button>
+</ion-row>
+ </ion-item>
 
-  <ion-card *ngFor="let item of dataSet">
+  <ion-card *ngFor="let item of dataSet; let msgIndex = index">
+    <ion-item>
+      <ion-icon name="trash" item-right (click)="feedDelete(item.feed_id, msgIndex)"></ion-icon>
     <ion-card-content>
+     
      <p [innerHTML]="item.feed | linky"></p>
-     <span>{{ converTime(item.created) | amTimeAgo}}</span>
+     <span>{{this.converTime(item.created) | amTimeAgo}}</span>
     </ion-card-content>
+    </ion-item>
   </ion-card>
 
   <!--<button ion-button color="primary" (click)="logout()">Logout</button>-->

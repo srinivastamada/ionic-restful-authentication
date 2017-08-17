@@ -2,11 +2,9 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
-
 import { AuthService } from '../providers/auth-service';
 import { SplitPane } from '../providers/split-pane';
-import { UserData } from '../providers/user-data';
-
+import { Common } from '../providers/common';
 import { HttpModule } from "@angular/http";
 import { Welcome } from '../pages/welcome/welcome';
 import { Login } from '../pages/login/login';
@@ -50,7 +48,7 @@ import { LinkyModule } from 'angular-linky';
   ],
   providers: [
     StatusBar,
-    SplashScreen,AuthService,SplitPane,UserData,
+    SplashScreen,AuthService,SplitPane,Common,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
