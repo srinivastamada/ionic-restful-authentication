@@ -13,7 +13,8 @@ export class HomePage {
     "user_id": "",
     "token": "",
     "feed": "",
-    "feed_id":""
+    "feed_id":"",
+    "lastCreated": "",
   };
 
   constructor(public common: Common, private alertCtrl: AlertController,public navCtrl : NavController, public app : App, public authService : AuthService) {
@@ -21,7 +22,7 @@ export class HomePage {
     this.userDetails = data.userData;
     this.userPostData.user_id = this.userDetails.user_id;
     this.userPostData.token = this.userDetails.token;
-
+    this.userPostData.lastCreated = "";
     this.getFeed();
 
   }
@@ -37,6 +38,10 @@ export class HomePage {
               this.common.closeLoading();
           this.dataSet = this.resposeData.feedData;
           console.log(this.dataSet);
+
+          const dataLength = this.resposeData.feedData.length;
+         
+          this.userPostData.lastCreated = this.resposeData.feedData[dataLength-1].created;
 
         } else {
           console.log("No access");
@@ -59,6 +64,9 @@ export class HomePage {
           this.common.closeLoading();
           this.dataSet.unshift(this.resposeData.feedData);
           this.userPostData.feed = "";
+
+         
+
          //this.updatebox.setFocus();
          setTimeout(() => {
         //  this.updatebox.focus();
@@ -122,21 +130,21 @@ export class HomePage {
 
   
 
-  doInfinite(e){
+  doInfinitex(e){
    console.log("I am here");
    setTimeout(() => {
     this.authService.postData(this.userPostData, "feed").then((result) => {
       this.resposeData = result;
-      if (this.resposeData.feedData) {
+      if (this.resposeData.feedData.length) {
         const newData = this.resposeData.feedData;
-       
+        this.userPostData.lastCreated = this.resposeData.feedData[newData.length-1].created;
+      
         for (let i = 0; i < newData.length; i++) {
-          this.dataSet.push( newData[i] );
+          this.dataSet.push(newData[i] );
         }
-        
 
       } else {
-        console.log("No access");
+        console.log("No user updates");
       }
 
     }, (err) => {
@@ -145,8 +153,33 @@ export class HomePage {
     console.log('Async operation has ended');
     e.complete();
   }, 500);
+  }
 
+  doInfinite(e): Promise<any> {
+    console.log('Begin async operation');
 
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        this.authService.postData(this.userPostData, "feed").then((result) => {
+          this.resposeData = result;
+          if (this.resposeData.feedData.length) {
+            const newData = this.resposeData.feedData;
+            this.userPostData.lastCreated = this.resposeData.feedData[newData.length-1].created;
+          
+            for (let i = 0; i < newData.length; i++) {
+              this.dataSet.push(newData[i] );
+            }
+    
+          } else {
+            console.log("No user updates");
+          }
+    
+        }, (err) => {
+          //Connection failed message
+        });
+        resolve();
+      }, 500);
+    })
   }
 
   converTime(time) {
