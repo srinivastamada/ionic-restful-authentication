@@ -11,7 +11,7 @@
 <ion-content padding>
   <h2>Welcome to {{userDetails.name}}</h2>
  <ion-item id="udpateBox">
-<textarea [(ngModel)]="userPostData.feed"></textarea>
+<textarea  #updatebox [(ngModel)]="userPostData.feed" autofocus></textarea>
 <ion-row>
 <button ion-button color="energy" (click)="feedUpdate()">Update</button>
 </ion-row>
@@ -27,6 +27,10 @@
     </ion-card-content>
     </ion-item>
   </ion-card>
+
+  <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 
   <!--<button ion-button color="primary" (click)="logout()">Logout</button>-->
 </ion-content>
