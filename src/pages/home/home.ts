@@ -1,10 +1,11 @@
-import {Component} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {NavController, App, AlertController} from 'ionic-angular';
 import {AuthService} from "../../providers/auth-service";
 import {Common} from "../../providers/common";
 
 @Component({selector: 'page-home', templateUrl: 'home.html'})
 export class HomePage {
+  @ViewChild('updatebox') updatebox;
   public userDetails : any;
   public resposeData : any;
   public dataSet : any;
@@ -58,6 +59,10 @@ export class HomePage {
           this.common.closeLoading();
           this.dataSet.unshift(this.resposeData.feedData);
           this.userPostData.feed = "";
+         //this.updatebox.setFocus();
+         setTimeout(() => {
+        //  this.updatebox.focus();
+        },150);
         } else {
           console.log("No access");
         }
@@ -112,6 +117,35 @@ export class HomePage {
 
      
     }
+
+  }
+
+  
+
+  doInfinite(e){
+   console.log("I am here");
+   setTimeout(() => {
+    this.authService.postData(this.userPostData, "feed").then((result) => {
+      this.resposeData = result;
+      if (this.resposeData.feedData) {
+        const newData = this.resposeData.feedData;
+       
+        for (let i = 0; i < newData.length; i++) {
+          this.dataSet.push( newData[i] );
+        }
+        
+
+      } else {
+        console.log("No access");
+      }
+
+    }, (err) => {
+      //Connection failed message
+    });
+    console.log('Async operation has ended');
+    e.complete();
+  }, 500);
+
 
   }
 
