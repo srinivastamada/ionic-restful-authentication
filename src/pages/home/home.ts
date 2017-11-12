@@ -30,7 +30,7 @@ export class HomePage {
     this.userPostData.user_id = this.userDetails.user_id;
     this.userPostData.token = this.userDetails.token;
     this.userPostData.lastCreated = "";
-    this.noRecords = false'
+    this.noRecords = false
     this.getFeed();
   }
 
