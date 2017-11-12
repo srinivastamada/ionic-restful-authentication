@@ -28,7 +28,15 @@
     </ion-item>
   </ion-card>
 
-  <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())">
+<ion-card *ngIf="noRecords">
+  <ion-item>
+    No Records
+    </ion-item>
+
+
+</ion-card>
+
+  <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" *ngIf="!noRecords">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>
 
