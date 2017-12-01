@@ -123,37 +123,10 @@ export class HomePage {
     }
   }
 
-  doInfinitex(e) {
-    console.log("I am here");
-    setTimeout(() => {
-      this.authService.postData(this.userPostData, "feed").then(
-        result => {
-          this.resposeData = result;
-          if (this.resposeData.feedData.length) {
-            const newData = this.resposeData.feedData;
-            this.userPostData.lastCreated = this.resposeData.feedData[
-              newData.length - 1
-            ].created;
 
-            for (let i = 0; i < newData.length; i++) {
-              this.dataSet.push(newData[i]);
-            }
-          } else {
-            console.log("No user updates");
-          }
-        },
-        err => {
-          //Connection failed message
-        }
-      );
-      console.log("Async operation has ended");
-      e.complete();
-    }, 500);
-  }
 
   doInfinite(e): Promise<any> {
     console.log("Begin async operation");
-
     return new Promise(resolve => {
       setTimeout(() => {
         this.authService.postData(this.userPostData, "feed").then(

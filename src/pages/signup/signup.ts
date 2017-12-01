@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController} from 'ionic-angular';
+import {IonicPage, NavController, ToastController} from 'ionic-angular';
 import {AuthService} from "../../providers/auth-service";
 
 import {TabsPage} from '../tabs/tabs';
@@ -16,7 +16,7 @@ import {Login} from "../login/login";
 export class Signup {
   resposeData : any;
   userData = {"username":"", "password":"","email":"","name":""};
-  constructor(public navCtrl : NavController, public authService : AuthService) {}
+  constructor(public navCtrl : NavController, public authService : AuthService, private toastCtrl:ToastController) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad Signup');
@@ -27,9 +27,15 @@ export class Signup {
       //Api connections
     this.authService.postData(this.userData, "signup").then((result) =>{
     this.resposeData = result;
-    console.log(this.resposeData);
-    localStorage.setItem('userData', JSON.stringify(this.resposeData) )
-    this.navCtrl.push(TabsPage);
+    if(this.resposeData.userData){
+      console.log(this.resposeData);
+      localStorage.setItem('userData', JSON.stringify(this.resposeData) )
+      this.navCtrl.push(TabsPage);
+    }
+    else{
+      this.presentToast("Please give valid username and password");
+    }
+    
     }, (err) => {
       //Connection failed message
     });
@@ -44,6 +50,14 @@ export class Signup {
     this
       .navCtrl
       .push(Login);
+  }
+
+  presentToast(msg) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 2000
+    });
+    toast.present();
   }
 
 }
